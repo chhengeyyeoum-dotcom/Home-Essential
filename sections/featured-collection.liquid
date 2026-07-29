@@ -1,0 +1,101 @@
+<section class="featured-collection">
+  <div class="section-head">
+    <h2>{{ section.settings.heading | default: 'Bestsellers' }}</h2>
+    <a href="{{ section.settings.view_all_link | default: '/collections/all' }}">View all</a>
+  </div>
+
+  <div class="{% if section.settings.layout == 'scroll' %}product-grid--scroll{% else %}product-grid{% endif %}">
+    {% for block in section.blocks %}
+      {% render 'product-card',
+        product: block.settings.product,
+        card_name: block.settings.demo_name,
+        card_price: block.settings.demo_price,
+        card_tag: block.settings.demo_tag,
+        card_hours: block.settings.demo_hours,
+        card_image_src: block.settings.demo_image
+      %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product collection",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Bestsellers" },
+    { "type": "url", "id": "view_all_link", "label": "'View all' link" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid (2 columns)" },
+        { "value": "scroll", "label": "Horizontal scroll" }
+      ],
+      "default": "grid"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "demo_name", "label": "Demo name (used until a product is linked)" },
+        { "type": "text", "id": "demo_price", "label": "Demo price" },
+        { "type": "text", "id": "demo_tag", "label": "Demo tag", "info": "e.g. Bestseller, New" },
+        { "type": "number", "id": "demo_hours", "label": "Demo burn hours", "default": 45 },
+        { "type": "url", "id": "demo_image", "label": "Demo image URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestsellers",
+      "settings": { "heading": "Bestsellers", "layout": "grid" },
+      "blocks": [
+        {
+          "type": "product_card",
+          "settings": {
+            "demo_name": "Angkor Amber",
+            "demo_price": "34.00",
+            "demo_tag": "Bestseller",
+            "demo_hours": 45,
+            "demo_image": "https://images.unsplash.com/photo-1602874801006-94d8e64f8b58?w=400&q=80"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "demo_name": "Kampot Pepper & Vetiver",
+            "demo_price": "38.00",
+            "demo_tag": "New",
+            "demo_hours": 52,
+            "demo_image": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=400&q=80"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "demo_name": "Mekong Fig & Cedar",
+            "demo_price": "36.00",
+            "demo_tag": "Signature",
+            "demo_hours": 48,
+            "demo_image": "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80"
+          }
+        },
+        {
+          "type": "product_card",
+          "settings": {
+            "demo_name": "Bokor Mist",
+            "demo_price": "34.00",
+            "demo_tag": "Limited",
+            "demo_hours": 40,
+            "demo_image": "https://images.unsplash.com/photo-1602910344008-22f323cc1817?w=400&q=80"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

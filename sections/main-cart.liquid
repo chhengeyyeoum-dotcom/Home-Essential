@@ -1,0 +1,87 @@
+<div class="cart-header">
+  <h1>Your bag</h1>
+  <span class="cart-count-pill">{{ cart.item_count | default: 5 }} items</span>
+</div>
+
+{% if cart.item_count > 0 or section.settings.show_demo %}
+  <div class="cart-list">
+    {% if cart.item_count > 0 %}
+      {% for item in cart.items %}
+        <div class="cart-item" data-unit-price="{{ item.final_price | money_without_currency }}">
+          <div class="cart-item__media"><img src="{{ item.image | image_url: width: 150 }}" alt="{{ item.title | escape }}"></div>
+          <div class="cart-item__body">
+            <div class="cart-item__top">
+              <div>
+                <div class="cart-item__name">{{ item.product.title }}</div>
+                <div class="cart-item__variant">{{ item.variant.title }}</div>
+              </div>
+              <button class="cart-item__remove" aria-label="Remove {{ item.product.title | escape }}">{% render 'icons', icon: 'trash' %}</button>
+            </div>
+            <div class="cart-item__bottom">
+              <div class="qty-stepper">
+                <button type="button" data-step="decrease" aria-label="Decrease quantity">–</button>
+                <input type="number" value="{{ item.quantity }}" min="1" max="10" aria-label="Quantity">
+                <button type="button" data-step="increase" aria-label="Increase quantity">+</button>
+              </div>
+              <span class="cart-item__price">{{ item.final_line_price | money }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      {%- comment -%} Demo line items so the page previews before a real cart exists {%- endcomment -%}
+      {% assign demo_items = "Sculptural Ceramic Vase,Sand,40.00,1|Table Lamp,Ceramic Base,89.00,1|Linen Cushion Cover,Beige (M),25.00,2|Woven Throw Blanket,Taupe,65.00,1|Wall Art Print,Abstract Shapes (A3),45.00,1" | split: "|" %}
+      {% for row in demo_items %}
+        {% assign parts = row | split: "," %}
+        <div class="cart-item" data-unit-price="{{ parts[2] }}">
+          <div class="cart-item__media"><img src="https://images.unsplash.com/photo-1602874801006-94d8e64f8b58?w=150&q=80" alt="{{ parts[0] }}"></div>
+          <div class="cart-item__body">
+            <div class="cart-item__top">
+              <div>
+                <div class="cart-item__name">{{ parts[0] }}</div>
+                <div class="cart-item__variant">{{ parts[1] }}</div>
+              </div>
+              <button class="cart-item__remove" aria-label="Remove {{ parts[0] }}">{% render 'icons', icon: 'trash' %}</button>
+            </div>
+            <div class="cart-item__bottom">
+              <div class="qty-stepper">
+                <button type="button" data-step="decrease" aria-label="Decrease quantity">–</button>
+                <input type="number" value="{{ parts[3] }}" min="1" max="10" aria-label="Quantity">
+                <button type="button" data-step="increase" aria-label="Increase quantity">+</button>
+              </div>
+              <span class="cart-item__price">${{ parts[2] }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="cart-summary">
+    <div class="summary-row"><span>Subtotal</span><span data-cart-subtotal>{{ cart.total_price | money | default: '$264.00' }}</span></div>
+    <div class="summary-row"><span>Delivery</span><span>Calculated at checkout</span></div>
+    <div class="summary-row total"><span>Total</span><span class="amount">{{ cart.total_price | money | default: '$264.00' }}</span></div>
+  </div>
+
+  <div class="sticky-bar">
+    <div style="flex:1;">
+      <div style="font-size:0.7rem; color:var(--color-ink-soft); font-family:var(--font-mono);">Subtotal</div>
+      <div style="font-family:var(--font-mono); font-size:1.05rem;" data-cart-subtotal-echo>{{ cart.total_price | money | default: '$264.00' }}</div>
+    </div>
+    <a href="{{ routes.cart_url }}/checkout" class="btn-primary" style="flex: 0 0 55%;">Checkout</a>
+  </div>
+{% else %}
+  <div class="empty-state">
+    {% render 'icons', icon: 'flame' %}
+    <p>Your bag is unlit. Browse the <a href="/collections/all" style="text-decoration:underline;">signature collection</a> to get started.</p>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "checkbox", "id": "show_demo", "label": "Show demo line items when cart is empty", "default": true }
+  ]
+}
+{% endschema %}

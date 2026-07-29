@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="site-footer__mark">{{ shop.name | default: 'Home Essentials' }}</div>
+  <div class="site-footer__loc">Phnom Penh · Cambodia</div>
+  <div class="site-footer__links">
+    <a href="{{ pages.shipping.url | default: '#' }}">Delivery</a>
+    <a href="{{ pages.about.url | default: '#' }}">Our story</a>
+    <a href="{{ pages.contact.url | default: '#' }}">Contact</a>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,15 @@
+<div class="announce">
+  <span>{{ section.settings.message | default: 'Free hand-delivery within Phnom Penh over $35' }}</span>
+  <span class="dot">·</span>
+  <span>{{ section.settings.message_secondary | default: 'Refill your vessel, save 15%' }}</span>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "message", "label": "Primary message", "default": "Free hand-delivery within Phnom Penh over $35" },
+    { "type": "text", "id": "message_secondary", "label": "Secondary message", "default": "Refill your vessel, save 15%" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,35 @@
+<section class="hero">
+  {% if section.settings.image %}
+    <img src="{{ section.settings.image | image_url: width: 900 }}" alt="">
+  {% else %}
+    <img src="https://images.unsplash.com/photo-1602523961358-f7a43a6bda9c?w=900&q=80" alt="">
+  {% endif %}
+
+  <span class="hero__badge">{{ section.settings.badge | default: '15% off · New scents' }}</span>
+
+  <div class="hero__content">
+    <span class="hero__eyebrow">{{ section.settings.eyebrow | default: 'Small-batch · hand-poured in PP' }}</span>
+    <h1 class="hero__title">{{ section.settings.heading | default: 'Home<br>Essentials' }}</h1>
+    <p class="hero__desc">{{ section.settings.subheading | default: 'Soy-wax candles scented with Kampot pepper, Mekong lotus and Cambodian sandalwood.' }}</p>
+    <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="hero__cta">
+      {{ section.settings.button_label | default: 'Shop the collection' }}
+      {% render 'icons', icon: 'chevron-right' %}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "badge", "label": "Corner badge", "default": "15% off · New scents" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Small-batch · hand-poured in PP" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Home Essentials" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Soy-wax candles scented with Kampot pepper, Mekong lotus and Cambodian sandalwood." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop the collection" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

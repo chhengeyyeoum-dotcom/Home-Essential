@@ -1,0 +1,95 @@
+<section class="pdp">
+  <div class="pdp-gallery">
+    <div class="pdp-gallery__nav">
+      <button class="icon-btn" onclick="history.back()" aria-label="Back">{% render 'icons', icon: 'chevron-left' %}</button>
+      <div style="display:flex; gap:6px;">
+        <button class="icon-btn" aria-label="Share">{% render 'icons', icon: 'share' %}</button>
+        <button class="icon-btn" aria-label="Save to wishlist">{% render 'icons', icon: 'heart' %}</button>
+      </div>
+    </div>
+
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }}">
+    {% else %}
+      <img src="https://images.unsplash.com/photo-1602874801006-94d8e64f8b58?w=900&q=80" alt="{{ section.settings.demo_name }}">
+    {% endif %}
+
+    <div class="pdp-gallery__dots">
+      <span class="is-active"></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="pdp-body">
+    <div class="pdp-badge-row">
+      <span class="pdp-badge">{{ section.settings.demo_tag | default: 'Bestseller' }}</span>
+      <span class="pdp-badge">Soy wax</span>
+      <span class="pdp-badge">Hand-poured, PP</span>
+    </div>
+
+    <div class="pdp-title-row">
+      <h1 class="pdp-title">{{ product.title | default: section.settings.demo_name | default: 'Angkor Amber' }}</h1>
+      <span class="pdp-price" data-pdp-price>${{ product.price | default: section.settings.demo_price | default: '34.00' }}</span>
+    </div>
+
+    <p class="pdp-desc">{{ product.description | default: section.settings.demo_description | default: 'Hand-poured amber and sandalwood candle, inspired by incense smoke drifting through the temple corridors of Angkor at dusk.' }}</p>
+
+    <div class="option-group">
+      <div class="option-group__label">Scent: <span class="value">{{ section.settings.demo_scent | default: 'Amber Dusk' }}</span></div>
+      <div class="swatch-row">
+        <button class="swatch is-selected" style="background:#B5895B" data-label="Amber Dusk" aria-label="Amber Dusk"></button>
+        <button class="swatch" style="background:#EDE3D2" data-label="Lotus & Musk" aria-label="Lotus & Musk"></button>
+        <button class="swatch" style="background:#8C6B4F" data-label="Sandalwood" aria-label="Sandalwood"></button>
+        <button class="swatch" style="background:#6E7A5A" data-label="Vetiver Leaf" aria-label="Vetiver Leaf"></button>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <div class="option-group__label">Vessel size</div>
+      <div class="pill-row">
+        <button class="pill-option" data-price="$22.00">Travel <span class="burn-hint">20h</span></button>
+        <button class="pill-option is-selected" data-price="$34.00">Classic <span class="burn-hint">45h</span></button>
+        <button class="pill-option" data-price="$58.00">Ceramic urn <span class="burn-hint">80h</span></button>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <details class="accordion__item" open>
+        <summary class="accordion__trigger">Scent notes<span>{% render 'icons', icon: 'plus' %}</span></summary>
+        <div class="accordion__panel">Top: Kampot pepper. Heart: amber resin, dried lotus. Base: Cambodian sandalwood and warm musk.</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__trigger">Materials & care<span>{% render 'icons', icon: 'plus' %}</span></summary>
+        <div class="accordion__panel">Soy-coconut wax blend, cotton wick, reusable stoneware vessel. Trim wick to 5mm before each burn; keep away from drafts.</div>
+      </details>
+      <details class="accordion__item">
+        <summary class="accordion__trigger">Delivery in Phnom Penh<span>{% render 'icons', icon: 'plus' %}</span></summary>
+        <div class="accordion__panel">Same-day motodop delivery inside Phnom Penh on orders placed before 3pm. Nationwide shipping in 2–4 days.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-bar">
+  <div class="qty-stepper">
+    <button type="button" data-step="decrease" aria-label="Decrease quantity">–</button>
+    <input type="number" value="1" min="1" max="10" aria-label="Quantity">
+    <button type="button" data-step="increase" aria-label="Increase quantity">+</button>
+  </div>
+  <button class="btn-primary" data-add-to-cart>
+    <span class="flame" aria-hidden="true"></span>
+    <span data-add-label>Add to cart</span>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "text", "id": "demo_name", "label": "Demo name" },
+    { "type": "text", "id": "demo_price", "label": "Demo price" },
+    { "type": "text", "id": "demo_tag", "label": "Demo tag" },
+    { "type": "text", "id": "demo_scent", "label": "Demo scent label" },
+    { "type": "textarea", "id": "demo_description", "label": "Demo description" }
+  ]
+}
+{% endschema %}

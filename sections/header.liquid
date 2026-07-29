@@ -1,0 +1,26 @@
+<header class="site-header">
+  <a href="{{ routes.root_url }}" class="site-header__brand">
+    <span class="site-header__brand-mark">{{ shop.name | default: 'Home Essentials' }}</span>
+  </a>
+
+  <div class="site-header__actions">
+    <button class="lang-toggle" aria-label="Change language">
+      <strong>EN</strong> · ខ្មែរ
+    </button>
+    <a href="{{ routes.search_url }}" class="icon-btn" aria-label="Search">
+      {% render 'icons', icon: 'search' %}
+    </a>
+    <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Cart, {{ cart.item_count }} items">
+      {% render 'icons', icon: 'bag' %}
+      <span class="cart-count">{{ cart.item_count | default: 3 }}</span>
+    </a>
+  </div>
+</header>
+<p class="site-header__brand-sub" style="padding: 0 20px; margin: -8px 0 4px;">Kampot &amp; Mekong · small-batch candles</p>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}
