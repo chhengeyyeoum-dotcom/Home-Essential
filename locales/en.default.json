@@ -1,0 +1,20 @@
+{
+  "general": {
+    "cart": {
+      "title": "Your bag",
+      "empty": "Your bag is unlit.",
+      "checkout": "Checkout"
+    },
+    "search": {
+      "placeholder": "Search scents, vessels, gifts"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "scent": "Scent",
+      "vessel_size": "Vessel size"
+    }
+  }
+}
