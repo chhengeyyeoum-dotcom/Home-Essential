@@ -1,0 +1,34 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Home Essentials — Luxury Candle Co.",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom build",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "header", "content": "Palette — sun-baked sand, aged gold, toasted amber" },
+      { "type": "color", "id": "color_bg", "label": "Background", "default": "#EDE6D9" },
+      { "type": "color", "id": "color_surface", "label": "Surface / cards", "default": "#FAF7F1" },
+      { "type": "color", "id": "color_ink", "label": "Text", "default": "#2A2318" },
+      { "type": "color", "id": "color_accent", "label": "Accent (buttons, price)", "default": "#9C6B3F" },
+      { "type": "color", "id": "color_gold", "label": "Signature gold (burn-ring, badges)", "default": "#C9A66B" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "header", "content": "Display face: Fraunces · Body: Work Sans · Data: IBM Plex Mono" }
+    ]
+  },
+  {
+    "name": "Localization",
+    "settings": [
+      { "type": "checkbox", "id": "show_khmer_toggle", "label": "Show EN / ខ្មែរ language toggle in header", "default": true },
+      { "type": "text", "id": "delivery_note", "label": "Delivery note", "default": "Same-day motodop delivery inside Phnom Penh" }
+    ]
+  }
+]
