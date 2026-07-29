@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "chips": { "type": "category-chips" },
+    "grid": {
+      "type": "featured-collection",
+      "settings": { "heading": "{{ collection.title }}", "layout": "grid" }
+    }
+  },
+  "order": ["chips", "grid"]
+}
