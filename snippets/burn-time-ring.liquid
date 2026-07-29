@@ -1,0 +1,19 @@
+{%- comment -%}
+  Signature element: a thin gold arc standing in for a candle's estimated
+  burn time. Purely decorative + informational — not a real progress bar.
+  Usage: {% render 'burn-time-ring', hours: 45, max_hours: 60 %}
+{%- endcomment -%}
+{%- liquid
+  assign max = max_hours | default: 60
+  assign pct = hours | times: 100.0 | divided_by: max
+  if pct > 100
+    assign pct = 100
+  endif
+-%}
+<div class="burn-ring" style="--burn-pct: {{ pct }};" aria-hidden="true">
+  <svg viewBox="0 0 40 40">
+    <circle class="track" cx="20" cy="20" r="17"></circle>
+    <circle class="arc" cx="20" cy="20" r="17"></circle>
+  </svg>
+  <span class="burn-ring__label">{{ hours }}h</span>
+</div>

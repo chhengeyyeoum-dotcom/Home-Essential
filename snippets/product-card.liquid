@@ -1,0 +1,33 @@
+{%- comment -%}
+  Usage: {% render 'product-card', product: product %}
+  Falls back to placeholder demo content when `product` has no real data,
+  so the theme previews correctly before a catalog is imported.
+{%- endcomment -%}
+{%- liquid
+  assign p_name = product.title | default: card_name
+  assign p_price = product.price | default: card_price
+  assign p_tag = product.type | default: card_tag
+  assign p_image = product.featured_image | default: card_image
+  assign p_hours = card_hours | default: 45
+  assign p_url = product.url | default: '#'
+-%}
+<a href="{{ p_url }}" class="product-card">
+  <div class="product-card__media">
+    {% if p_image %}
+      <img src="{{ p_image | image_url: width: 400 }}" alt="{{ p_name | escape }}" loading="lazy">
+    {% else %}
+      <img src="{{ card_image_src }}" alt="{{ p_name | escape }}" loading="lazy">
+    {% endif %}
+    {% render 'burn-time-ring', hours: p_hours %}
+  </div>
+  <div class="product-card__body">
+    {% if p_tag %}<span class="product-card__tag">{{ p_tag }}</span>{% endif %}
+    <div class="product-card__name">{{ p_name }}</div>
+    <div class="product-card__meta">
+      <span class="product-card__price">${{ p_price }}</span>
+      <span class="product-card__add" data-add-to-cart aria-label="Add {{ p_name | escape }} to cart">
+        {% render 'icons', icon: 'plus' %}
+      </span>
+    </div>
+  </div>
+</a>
